@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Document
+
+def uploadDocument(request):
+
+    return render(request,'files/files_upload')

@@ -1,0 +1,7 @@
+<h1>Upload PDF Files</h1>
+
+<form method="post" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Upload"/>
+</form>
