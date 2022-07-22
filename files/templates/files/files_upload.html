@@ -1,6 +1,6 @@
 <h1>Upload PDF Files</h1>
 
-<form method="post" action="">
+<form method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}
     {{form.as_p}}
     <input type="submit" value="Upload"/>
