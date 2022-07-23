@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="64d5ec61-c03b-4d72-89d0-1aba8b676e2b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/pdf_documents/Curriculum_Vitae_for_wendy__chiridza.pdf" beforeDir="false" />
-    </list>
+    <list default="true" id="64d5ec61-c03b-4d72-89d0-1aba8b676e2b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
