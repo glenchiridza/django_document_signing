@@ -46,7 +46,10 @@ def sign_document(request):
             document = Document.objects.get(id=doc_pk)
             signature = Signature.objects.get(id=sn_pk)
             print(document.upload_pdf.url, signature.signature_image.url)
-            sign_pdf_file(document.upload_pdf.url, signature)
+            full_sign_url = request.build_absolute_uri(signature.signature_image.url)
+            sign_pdf_file(document.document_name,
+                          str(document.upload_pdf.url)[1:],
+                          full_sign_url)
     context = {
         "form": form
     }

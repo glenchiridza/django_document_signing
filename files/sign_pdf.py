@@ -12,13 +12,12 @@ import typing
 
 from decimal import Decimal
 
-from .models import Document,Signature
 
-
-
-def sign_pdf_file(pdf_file_handle,signature):
+def sign_pdf_file(pdf_name,pdf_file, signature_url):
+    print(pdf_file)
     doc: typing.Optional[Document] = None
-    doc = PDF.loads(pdf_file_handle)
+    with open(pdf_file, "rb") as pdf_file_handle:
+        doc = PDF.loads(pdf_file_handle)
 
     assert doc is not None
 
@@ -34,7 +33,7 @@ def sign_pdf_file(pdf_file_handle,signature):
     # add an Image
     layout.add(
         Image(
-            Path("static/signature.png"),
+            signature_url,
             width=Decimal(100),
             height=Decimal(50),
             horizontal_alignment=Alignment.RIGHT,
@@ -43,5 +42,5 @@ def sign_pdf_file(pdf_file_handle,signature):
     )
 
     # store
-    with open("output.pdf", "wb") as pdf_file_handle:
+    with open(f"media/signed_documents/{pdf_name}", "wb") as pdf_file_handle:
         PDF.dumps(pdf_file_handle, doc)
