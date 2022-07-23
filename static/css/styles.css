@@ -44,6 +44,7 @@ select{
     width:320px;
     background:#ffffff;
     color:#000;
+    border-radius:14px;
 }
 
 ul li{

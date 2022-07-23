@@ -8,6 +8,12 @@
 </head>
 <body class="container">
 
+<div class="title">
+<a href="{% url 'success-page' %}" class="btn-doc">Home</a>
+<a href="{% url 'upload-document' %}" class="btn-doc">Upload document for signing</a>
+<a href="{% url 'sign-document' %}" class="btn-doc">Sign existing document</a>
+</div>
+
 <h1 class="title">Document Signing</h1>
 
 {% block content %}
