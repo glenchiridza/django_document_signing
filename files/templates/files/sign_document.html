@@ -1,7 +1,31 @@
-<h1>Select document to sign</h1>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="section">
+
+    <div class="left">
 
 <form method="post" action="">
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Process & Sign"/>
+    {% for field in form %}
+    <p>{{field.label}}</p>
+        {{field}}
+    {% endfor %}
+    <br/>
+    <br/>
+    <input type="submit" value="Process & Sign" class="btn-upload"/>
 </form>
+
+    </div>
+
+<div class="right">
+
+<h1>Select document to sign</h1>
+    <p></p>
+    <img class="upload-image" src="{% static 'images/laptop.png' %}"/>
+</div>
+
+</div>
+{% endblock %}

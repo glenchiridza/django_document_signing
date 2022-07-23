@@ -1,0 +1,51 @@
+.container{
+    margin:5%;
+    margin-top:2%;
+    padding:10px;
+    background:#000;
+    color:#fff;
+
+}
+.title{
+    display:flex;
+    justify-content:center;
+}
+.upload-image{
+    width:40vw;
+    height:50vh;
+}
+.btn-upload{
+    width:320px;
+}
+
+.section{
+    display:flex;
+    justify-content:center;
+}
+.left{
+    width:45%;
+}
+.right{
+    width:45%;
+}
+input{
+    width:300px;
+    padding:10px;
+    border:1px solid #e6e5e3;
+}
+select{
+    width:320px;
+    padding:10px;
+    border:1px solid #e6e5e3;
+}
+
+.btn-doc{
+    padding:10px;
+    width:320px;
+    background:#ffffff;
+    color:#000;
+}
+
+ul li{
+list-style:number;
+}

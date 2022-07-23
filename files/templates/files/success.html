@@ -1,8 +1,16 @@
-<h1>Upload and signing was successful</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
 <p>
-<a href="{% url 'upload-document' %}">Upload and sign another document</a>
+<a href="{% url 'upload-document' %}" class="btn-doc">Upload document for signing</a>
 </p>
 
+<h1>List of signed documents</h1>
+<ul>
 {% for doc in documents %}
-    <p>{{doc.upload_pdf.url}}</p>
+    <li>{{doc.document_name}}</li>
 {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="64d5ec61-c03b-4d72-89d0-1aba8b676e2b" name="Default Changelist" comment="" />
+    <list default="true" id="64d5ec61-c03b-4d72-89d0-1aba8b676e2b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/media/signed_documents/glen.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/laptop.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document_signing/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/document_signing/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/templates/files/files_upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/files/templates/files/files_upload.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/templates/files/sign_document.html" beforeDir="false" afterPath="$PROJECT_DIR$/files/templates/files/sign_document.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/templates/files/success.html" beforeDir="false" afterPath="$PROJECT_DIR$/files/templates/files/success.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -29,18 +41,19 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/files/templates/files" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/images" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/static" />
-      <recent name="$PROJECT_DIR$/../output" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/images" />
       <recent name="$PROJECT_DIR$/files/templates/files" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/static" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/../output" />
     </key>
   </component>
   <component name="RunManager">
@@ -89,26 +102,30 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="397" y="200" width="562" height="392" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1366.741@0.27.1366.741" timestamp="1658537274959" />
-    <state x="415" y="144" width="526" height="504" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1658527779305">
+    <state x="415" y="144" width="526" height="504" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1658538717780">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="415" y="144" width="526" height="504" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1366.741@0.27.1366.741" timestamp="1658527779305" />
-    <state width="1341" height="175" key="GridCell.Tab.0.bottom" timestamp="1658529021676">
+    <state x="415" y="144" width="526" height="504" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1366.741@0.27.1366.741" timestamp="1658538717780" />
+    <state width="1341" height="175" key="GridCell.Tab.0.bottom" timestamp="1658539305628">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1341" height="175" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1658529021676" />
-    <state width="1341" height="175" key="GridCell.Tab.0.center" timestamp="1658529021675">
+    <state width="1341" height="175" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1658539305628" />
+    <state width="1341" height="175" key="GridCell.Tab.0.center" timestamp="1658539305627">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1341" height="175" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1658529021675" />
-    <state width="1341" height="175" key="GridCell.Tab.0.left" timestamp="1658529021674">
+    <state width="1341" height="175" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1658539305627" />
+    <state width="1341" height="175" key="GridCell.Tab.0.left" timestamp="1658539305627">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1341" height="175" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1658529021674" />
-    <state width="1341" height="175" key="GridCell.Tab.0.right" timestamp="1658529021676">
+    <state width="1341" height="175" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1658539305627" />
+    <state width="1341" height="175" key="GridCell.Tab.0.right" timestamp="1658539305628">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1341" height="175" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1658529021676" />
+    <state width="1341" height="175" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1658539305628" />
+    <state x="337" y="223" key="com.intellij.ide.util.TipDialog" timestamp="1658586644238">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="337" y="223" key="com.intellij.ide.util.TipDialog/0.27.1366.741@0.27.1366.741" timestamp="1658586644238" />
     <state x="450" y="315" width="456" height="162" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1658534801453">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
