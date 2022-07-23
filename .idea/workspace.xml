@@ -3,10 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="64d5ec61-c03b-4d72-89d0-1aba8b676e2b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/sign_pdf.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/sign_pdf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/pdf_documents/Letter_of_confirmation.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/media/pdf_documents/Letter_of_confirmation.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/output.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/signed_documents/output.pdf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +92,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="397" y="200" width="562" height="392" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1658537274959">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="397" y="200" width="562" height="392" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1366.741@0.27.1366.741" timestamp="1658537274959" />
     <state x="415" y="144" width="526" height="504" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1658527779305">
       <screen x="0" y="27" width="1366" height="741" />
     </state>

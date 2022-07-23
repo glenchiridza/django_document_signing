@@ -13,7 +13,7 @@ import typing
 from decimal import Decimal
 
 
-def sign_pdf_file(pdf_name,pdf_file, signature_url):
+def sign_pdf_file(pdf_name, pdf_file, signature_url, page_num):
     print(pdf_file)
     doc: typing.Optional[Document] = None
     with open(pdf_file, "rb") as pdf_file_handle:
@@ -21,8 +21,11 @@ def sign_pdf_file(pdf_name,pdf_file, signature_url):
 
     assert doc is not None
 
-    # create Page
-    page: Page = doc.get_page(0)
+    # check if page_num was not specified or less that zero
+    if page_num < 0 or page_num > len(doc.items()):
+        page_num = 0
+    # pagenum-1 because count starts from zero
+    page: Page = doc.get_page(page_num - 1)
 
     # add Page to Document
     doc.add_page(page)
@@ -42,5 +45,5 @@ def sign_pdf_file(pdf_name,pdf_file, signature_url):
     )
 
     # store
-    with open(f"media/signed_documents/{pdf_name}", "wb") as pdf_file_handle:
+    with open(f"media/signed_documents/{pdf_name}.pdf", "wb") as pdf_file_handle:
         PDF.dumps(pdf_file_handle, doc)
