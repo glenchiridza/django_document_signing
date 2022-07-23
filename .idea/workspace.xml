@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64d5ec61-c03b-4d72-89d0-1aba8b676e2b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/files/templates/files/success.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/files/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/sign_pdf.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/files/templates/files/sign_document.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/document_signing/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/document_signing/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/templates/files/files_upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/files/templates/files/files_upload.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/templates/files/success.html" beforeDir="false" afterPath="$PROJECT_DIR$/files/templates/files/success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -40,7 +40,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/files/templates/files" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -49,6 +49,7 @@
       <recent name="$PROJECT_DIR$/../output" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/files/templates/files" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/static" />
     </key>
@@ -115,5 +116,9 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1341" height="175" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1658529021676" />
+    <state x="450" y="315" width="456" height="162" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1658534801453">
+      <screen x="0" y="27" width="1366" height="741" />
+    </state>
+    <state x="450" y="315" width="456" height="162" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.1366.741@0.27.1366.741" timestamp="1658534801453" />
   </component>
 </project>

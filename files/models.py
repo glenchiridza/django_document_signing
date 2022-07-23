@@ -18,3 +18,11 @@ class Document(models.Model):
 
     def __str__(self):
         return self.document_name
+
+
+class SignDocument(models.Model):
+    document = models.OneToOneField(Document, on_delete=models.SET_NULL, null=True)
+    signature = models.OneToOneField(Signature, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f"signed document {self.document.document_name}"
