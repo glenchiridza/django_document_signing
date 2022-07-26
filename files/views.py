@@ -83,7 +83,7 @@ class ESignListView(generic.ListView):
 
 
 
-def sign_document(request):
+def esign_document(request):
     form = ESignForm()
     if request.method == "POST":
         form = ESignForm(request.POST)

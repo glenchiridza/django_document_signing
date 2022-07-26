@@ -8,5 +8,6 @@ urlpatterns = [
     path('e_update/<int:pk>/', views.ESignUpdateView.as_view(), name='update'),
     path('document/', uploadDocument, name='upload-document'),
     path('', success_page, name='success-page'),
-    path('sign/', sign_document, name='sign-document')
+    path('sign/', sign_document, name='sign-document'),
+    path('esign/', views.esign_document, name='esign-document')
 ]
