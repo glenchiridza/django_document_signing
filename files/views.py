@@ -4,7 +4,7 @@ from django.urls import reverse_lazy, reverse
 
 from jsignature.templatetags.jsignature_filters import signature_base64
 from .models import Document, Signature, SignDocument, ESignModel, ESignModel
-from .forms import UploadForm, SignForm, ESignForm
+from .forms import UploadForm, SignForm, ESignForm,SendForSigningForm
 from .sign_pdf import sign_pdf_file
 from django.contrib.auth.models import User
 from django.views import generic
@@ -71,11 +71,18 @@ def sign_document(request):
                           full_sign_url,
                           int(page_num),
                           int(num_of_signatures))
+            signed_pdf_link = f"/media/signed_documents/{document.document_name}.pdf"
+            doc_sign.signed_document_url = signed_pdf_link
             doc_sign.save()
     context = {
         "form": form
     }
     return render(request, 'files/sign_document.html', context)
+
+
+class SendForSigningView(generic.CreateView):
+    template_name = "files/sendforsigning.html"
+    form_class = SendForSigningForm
 
 
 # Esign views

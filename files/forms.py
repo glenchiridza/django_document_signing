@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Document, SignDocument, ESignDocument
+from .models import Document, SignDocument, ESignDocument, SendForSigning
 
 
 class UploadForm(ModelForm):
@@ -18,3 +18,9 @@ class ESignForm(ModelForm):
     class Meta:
         model = ESignDocument
         fields = ("document", "signature", "page_number", "num_of_signatures")
+
+
+class SendForSigningForm(ModelForm):
+    class Meta:
+        model = SendForSigning
+        fields = "__all__"
