@@ -38,7 +38,7 @@ class SignDocument(models.Model):
 
 class SendForSigning(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    document = models.ForeignKey(Document, on_delete=models.CASCADE)
+    document = models.ForeignKey(SignDocument, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username

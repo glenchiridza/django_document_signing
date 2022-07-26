@@ -14,6 +14,12 @@ class SignForm(ModelForm):
         fields = ("document", "signature", "page_number", "num_of_signatures")
 
 
+class SentSignForm(ModelForm):
+    class Meta:
+        model = SignDocument
+        fields = ("signature","document")
+
+
 class ESignForm(ModelForm):
     class Meta:
         model = ESignDocument
