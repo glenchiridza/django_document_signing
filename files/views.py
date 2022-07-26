@@ -1,11 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from .models import Document, Signature, SignDocument, ESignModel, ESignModel
 from .forms import UploadForm, SignForm, ESignForm
 from .sign_pdf import sign_pdf_file
-
+from django.contrib.auth.models import User
 from django.views import generic
 
 
@@ -67,20 +67,35 @@ def sign_document(request):
 
 class ESignCreateView(generic.CreateView):
     model = ESignModel
-    fields = '__all__'
+    fields = ('signature', 'signature_date')
     success_url = reverse_lazy('list')
+
+    def dispatch(self, request, *args, **kwargs):
+        exists = User.objects.get(username=self.request.user.username)
+        if exists:
+            return redirect("/upload/e_update/"+ str(self.request.user.id))
+
+    def form_valid(self, form):
+        esign = form.save(commit=False)
+        esign.user = self.request.user
+        esign.save()
+        return super(ESignCreateView, self).form_valid(form)
 
 
 class ESignUpdateView(generic.UpdateView):
     model = ESignModel
-    fields = '__all__'
+    fields = ('signature', 'signature_date')
     success_url = reverse_lazy('list')
+
+    def form_valid(self, form):
+        esign = form.save(commit=False)
+        esign.user = self.request.user
+        esign.save()
+        return super(ESignUpdateView, self).form_valid(form)
 
 
 class ESignListView(generic.ListView):
     model = ESignModel
-
-
 
 
 def esign_document(request):

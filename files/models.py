@@ -1,5 +1,8 @@
 from django.db import models
 from jsignature.mixins import JSignatureFieldsMixin
+from django.contrib.auth.views import get_user_model
+
+User = get_user_model()
 
 
 class Signature(models.Model):
@@ -32,10 +35,13 @@ class SignDocument(models.Model):
 
 # jsignature model
 class ESignModel(JSignatureFieldsMixin):
-    pass
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
 
 
-class ESigDocument(models.Model):
+class ESignDocument(models.Model):
     document = models.OneToOneField(Document, on_delete=models.SET_NULL, null=True)
     signature = models.OneToOneField(ESignModel, on_delete=models.SET_NULL, null=True)
     page_number = models.PositiveIntegerField(default=0)
