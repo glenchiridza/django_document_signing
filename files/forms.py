@@ -12,3 +12,9 @@ class SignForm(ModelForm):
     class Meta:
         model = SignDocument
         fields = "__all__"
+
+
+class ESignForm(ModelForm):
+    class Meta:
+        model = SignDocument
+        fields = "__all__"

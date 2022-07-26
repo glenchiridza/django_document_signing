@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 
-from .models import Document, Signature, SignDocument, ESignModel
-from .forms import UploadForm, SignForm
+from .models import Document, Signature, SignDocument, ESignModel, ESignModel
+from .forms import UploadForm, SignForm, ESignForm
 from .sign_pdf import sign_pdf_file
 
 from django.views import generic
@@ -79,3 +79,28 @@ class ESignUpdateView(generic.UpdateView):
 
 class ESignListView(generic.ListView):
     model = ESignModel
+
+
+
+
+def sign_document(request):
+    form = ESignForm()
+    if request.method == "POST":
+        form = ESignForm(request.POST)
+        if form.is_valid():
+            doc_pk = request.POST.get('document')
+            sn_pk = request.POST.get('signature')
+            page_num = request.POST.get('page_number')
+            document = Document.objects.get(id=doc_pk)
+            signature = ESignModel.objects.get(id=sn_pk)
+            print(document.upload_pdf.url, signature.signature_image.url)
+            full_sign_url = request.build_absolute_uri(signature.signature)
+            sign_pdf_file(document.document_name,
+                          str(document.upload_pdf.url)[1:],
+                          full_sign_url,
+                          int(page_num))
+            form.save()
+    context = {
+        "form": form
+    }
+    return render(request, 'files/sign_document.html', context)
