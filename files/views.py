@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 
+from jsignature.templatetags.jsignature_filters import signature_base64
 from .models import Document, Signature, SignDocument, ESignModel, ESignModel
 from .forms import UploadForm, SignForm, ESignForm
 from .sign_pdf import sign_pdf_file
@@ -10,9 +11,18 @@ from django.views import generic
 
 
 def success_page(request):
-    documents = SignDocument.objects.all()
+    documents = Document.objects.all()
+    signed = []
+    not_signed = []
+    for doc in documents:
+        docs_signed = SignDocument.objects.filter(document__document_name=doc.document_name)
+        if docs_signed:
+            signed.append(doc)
+        else:
+            not_signed.append(doc)
     context = {
-        "documents": documents
+        "documents": not_signed,
+        "signed_docs":signed
     }
     return render(request, 'files/success.html', context)
 
@@ -108,11 +118,11 @@ def esign_document(request):
             page_num = request.POST.get('page_number')
             document = Document.objects.get(id=doc_pk)
             signature = ESignModel.objects.get(id=sn_pk)
-            print(document.upload_pdf.url, signature.signature_image.url)
-            full_sign_url = request.build_absolute_uri(signature.signature)
+            print(document.upload_pdf.url, signature_base64(signature.signature))
+            # full_sign_url = request.build_absolute_uri(signature.signature)
             sign_pdf_file(document.document_name,
                           str(document.upload_pdf.url)[1:],
-                          full_sign_url,
+                          signature_base64(signature.signature),
                           int(page_num))
             form.save()
     context = {

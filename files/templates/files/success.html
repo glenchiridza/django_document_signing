@@ -8,12 +8,27 @@
 
 </p>
 
-<h1>List of signed documents</h1>
+<h1>Documents Waiting to be signed</h1>
 
 <ul>
 {% for doc in documents %}
 
-    <li>{{doc.document.document_name}}</li>
+    <li>{{doc}}</li>
+
+
+{% endfor %}
+</ul>
+
+
+
+<h1>List of signed documents</h1>
+
+<ul>
+{% for s_doc in signed_docs %}
+
+    <li>{{s_doc}}</li>
+
+
 {% endfor %}
 </ul>
 
