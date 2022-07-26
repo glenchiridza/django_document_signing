@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Docs to be signed</h1>
+
+{% for doc in signed_docs %}
+    <a href="">{{doc.document.document_name}}</a>
+{% endfor %}
+
+{% endblock %}
