@@ -9,7 +9,7 @@ urlpatterns = [
     path('document/', uploadDocument, name='upload-document'),
     path('', success_page, name='success-page'),
     path('send-doc/', views.SendForSigningView.as_view(), name='send-doc'),
-    path('sign_send/', views.sign_send_document, name='sign-send-document'),
+    path('sign_send/<int:pk>/', views.sign_send_document, name='sign-send-document'),
     path('sign/', sign_document, name='sign-document'),
     path('esign/', views.esign_document, name='esign-document')
 ]

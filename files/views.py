@@ -8,6 +8,7 @@ from .forms import UploadForm, SignForm, ESignForm, SendForSigningForm, SentSign
 from .sign_pdf import sign_pdf_file
 from django.contrib.auth.models import User
 from django.views import generic
+from django.db.models import Q
 
 
 def success_page(request):
@@ -80,37 +81,45 @@ def sign_document(request):
     return render(request, 'files/sign_document.html', context)
 
 
-def sign_send_document(request):
-    doc_send = SendForSigning.objects.filter(user=request.user)
-    form = SentSignForm()
-    if request.method == "POST":
-        form = SentSignForm(request.POST)
-        if form.is_valid():
-            sn_pk = request.POST.get('signature')
-            page_num = doc_send.document.page_number
-
-            signature = Signature.objects.get(id=sn_pk)
-
-            full_sign_url = request.build_absolute_uri(signature.signature_image.url)
-
-            doc_sign = form.save(commit=False)
-            doc_sign.user_signed += 1
-            doc_sign.document = doc_send.document.document
-            doc_sign.page_number = page_num
-            doc_sign.num_of_signatures = doc_send.document.num_of_signatures
-
-            sign_pdf_file(doc_send.document.document_name,
-                          str(doc_send.document.upload_pdf.url)[1:],
-                          full_sign_url,
-                          int(page_num),
-                          int(doc_send.document.num_of_signatures))
-
-            doc_sign.signed_document_url = doc_send.document.signed_document_url
-            doc_sign.save()
+def sign_send_document(request,pk):
+    doc_send = SendForSigning.objects.filter(
+        Q(user=request.user) &
+        Q(id=pk)
+    )
     context = {
-        "form": form,
-        "items":doc_send
+        "valid_id":False
     }
+    if doc_send:
+        form = SentSignForm()
+        if request.method == "POST":
+            form = SentSignForm(request.POST)
+            if form.is_valid():
+                sn_pk = request.POST.get('signature')
+                page_num = doc_send.document.page_number
+
+                signature = Signature.objects.get(id=sn_pk)
+
+                full_sign_url = request.build_absolute_uri(signature.signature_image.url)
+
+                doc_sign = form.save(commit=False)
+                doc_sign.user_signed += 1
+                doc_sign.document = doc_send.document.document
+                doc_sign.page_number = page_num
+                doc_sign.num_of_signatures = doc_send.document.num_of_signatures
+
+                sign_pdf_file(doc_send.document.document_name,
+                              str(doc_send.document.upload_pdf.url)[1:],
+                              full_sign_url,
+                              int(page_num),
+                              int(doc_send.document.num_of_signatures))
+
+                doc_sign.signed_document_url = doc_send.document.signed_document_url
+                doc_sign.save()
+        context = {
+            "form": form,
+            "items":doc_send,
+            "valid_id":True
+        }
     return render(request, 'files/sign_document.html', context)
 
 
