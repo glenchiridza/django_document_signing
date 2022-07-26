@@ -9,6 +9,62 @@ from .sign_pdf import sign_pdf_file
 from django.contrib.auth.models import User
 from django.views import generic
 from django.db.models import Q
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+
+
+
+def loginPage(request):
+    page = 'login'
+    # restrict a logged in user from going to the login url again
+    if request.user.is_authenticated:
+        return redirect('success-page')
+
+    if request.method == 'POST':
+        username = request.POST.get('username').lower()
+        password = request.POST.get('password')
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'User with that username does not exist')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('success-page')
+        else:
+            messages.error(request, 'Username or password does not exist')
+
+    context = {
+        'page': page
+    }
+    return render(request, 'files/login_register.html', context)
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('success-page')
+
+
+def registerUser(request):
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return redirect('success-page')
+        else:
+            messages.error(request, 'An error occurred during registration')
+    context = {
+        'form': form
+    }
+    return render(request, 'files/login_register.html', context)
 
 
 def success_page(request):
@@ -26,12 +82,6 @@ def success_page(request):
         "signed_docs": signed
     }
     return render(request, 'files/success.html', context)
-
-
-# def sign_uploaded_pdf(f):
-#     with open('some/file/name.txt', 'wb+') as destination:
-#         for chunk in f.chunks():
-#             destination.write(chunk)
 
 
 def uploadDocument(request):
@@ -81,13 +131,13 @@ def sign_document(request):
     return render(request, 'files/sign_document.html', context)
 
 
-def sign_send_document(request,pk):
+def sign_send_document(request, pk):
     doc_send = SendForSigning.objects.filter(
         Q(user=request.user) &
         Q(id=pk)
     )
     context = {
-        "valid_id":False
+        "valid_id": False
     }
     if doc_send:
         form = SentSignForm()
@@ -117,8 +167,8 @@ def sign_send_document(request,pk):
                 doc_sign.save()
         context = {
             "form": form,
-            "items":doc_send,
-            "valid_id":True
+            "items": doc_send,
+            "valid_id": True
         }
     return render(request, 'files/sign_document.html', context)
 
@@ -127,6 +177,17 @@ class SendForSigningView(generic.CreateView):
     template_name = "files/sendforsigning.html"
     form_class = SendForSigningForm
 
+    def form_valid(self, form):
+        send = form.save(commit=False)
+        send.sender = self.request.user
+        send.save()
+        return super(SendForSigningView, self).form_valid(form)
+
+
+class ToBeSigned(generic.ListView):
+    template_name = "files/to_be_signed.html"
+    queryset = SendForSigning.objects.all()
+    context_object_name = "o"
 
 # Esign views
 

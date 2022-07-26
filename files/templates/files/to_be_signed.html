@@ -5,7 +5,8 @@
 <h1>Docs to be signed</h1>
 
 {% for doc in signed_docs %}
-    <a href="">{{doc.document.document_name}}</a>
+    <a href="{% url 'sign-send-document' doc.id %}">{{doc.document}}</a>
+    <p>Send by {{doc.sender}}</p>
 {% endfor %}
 
 {% endblock %}

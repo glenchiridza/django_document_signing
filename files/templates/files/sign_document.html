@@ -10,7 +10,7 @@
 {% if valid_id %}
 
 {% for item in items %}
-            {{item.document.id}}
+            {{item.document.document_name}}
         {% endfor %}
 <form method="post" action="">
     {% csrf_token %}

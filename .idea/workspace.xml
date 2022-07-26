@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64d5ec61-c03b-4d72-89d0-1aba8b676e2b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/files/templates/files/login_register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document_signing/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/document_signing/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/templates/files/sign_document.html" beforeDir="false" afterPath="$PROJECT_DIR$/files/templates/files/sign_document.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/templates/files/to_be_signed.html" beforeDir="false" afterPath="$PROJECT_DIR$/files/templates/files/to_be_signed.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/files/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

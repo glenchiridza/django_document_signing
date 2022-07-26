@@ -10,6 +10,7 @@ urlpatterns = [
     path('', success_page, name='success-page'),
     path('send-doc/', views.SendForSigningView.as_view(), name='send-doc'),
     path('sign_send/<int:pk>/', views.sign_send_document, name='sign-send-document'),
+    path('docs_to_sign/', views.ToBeSigned.as_view(), name='docs_to_sign'),
     path('sign/', sign_document, name='sign-document'),
     path('esign/', views.esign_document, name='esign-document')
 ]
