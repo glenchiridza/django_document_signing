@@ -9,9 +9,11 @@
 </p>
 
 <h1>List of signed documents</h1>
+
 <ul>
 {% for doc in documents %}
-    <li>{{doc.document_name}}</li>
+
+    <li>{{doc.document.document_name}}</li>
 {% endfor %}
 </ul>
 

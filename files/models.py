@@ -1,4 +1,5 @@
 from django.db import models
+from jsignature.mixins import JSignatureFieldsMixin
 
 
 class Signature(models.Model):
@@ -27,3 +28,8 @@ class SignDocument(models.Model):
 
     def __str__(self):
         return f"signed document {self.document.document_name}"
+
+
+# jsignature model
+class ESignModel(JSignatureFieldsMixin):
+    pass

@@ -1,13 +1,13 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from .models import Document, Signature
+from .models import Document, Signature,SignDocument
 from .forms import UploadForm, SignForm
 from .sign_pdf import sign_pdf_file
 
 
 def success_page(request):
-    documents = Document.objects.all()
+    documents = SignDocument.objects.all()
     context = {
         "documents": documents
     }
@@ -52,6 +52,7 @@ def sign_document(request):
                           str(document.upload_pdf.url)[1:],
                           full_sign_url,
                           int(page_num))
+            form.save()
     context = {
         "form": form
     }
