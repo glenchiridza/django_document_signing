@@ -10,7 +10,7 @@
     margin-top:-4%;
     display:flex;
     justify-content:space-between;
-    background:blue;
+    background:#000;
     align-items:center;
     color:#ffffff;
 
@@ -18,10 +18,39 @@
 .nav a{
     color:#fff !important;
 }
+.btn-square{
+    padding:10px;
+    margin:3% 10%;
+    color:#ffffff;
+    text-decoration:none;
+    background:orange;
+}
+.btn-highlight{
+    padding:10px;
+    margin:3% 10%;
+    color:#000000;
+    text-decoration:none;
+    background:#eeeeee;
+}
+.btn-high{
+    padding:10px;
+    color:#000000;
+    margin-left:2%;
+    text-decoration:none;
+    background:#eeeeee;
+}
+.doc_options{
+    margin-left:10%;
+    margin-top:0;
+}
+.doc_options a{
+    color:gray;
+}
 .interface{
     display:flex;
     width:100%;
 }
+
 
 .left_interface{
     width:25%;
@@ -32,7 +61,36 @@
     width:75%;
     display:flex;
     flex-direction:column;
+    background:#fff;
 }
+.content{
+    margin-top:3%;
+    display:flex;
+    flex-direction:column;
+    border:1px solid #e6e5e3;
+    padding-left:10px;
+}
+
+.content p{
+    font-size:12px;
+}
+.signed{
+    border:1px solid #e6e5e3;
+    font-size:12px;
+    font-weight:800;
+    background:darkgreen;
+    color:#fff;
+    padding: 10px 0;
+}
+.not_signed{
+    border:1px solid #e6e5e3;
+    font-size:12px;
+    font-weight:800;
+    background:#000;
+    color:#fff;
+    padding: 10px 0;
+}
+
 
 .field{
     display:flex;
@@ -93,3 +151,5 @@ select{
 ul li{
 list-style:number;
 }
+
+

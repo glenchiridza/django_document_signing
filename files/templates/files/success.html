@@ -20,11 +20,33 @@
 <div class="interface">
 
     <div class="left_interface">
-oiko
+
+        <a class="btn-square" href="{% url 'upload-document' %}">Upload Document</a>
+
+        <p class="btn-highlight">Documents</p>
+        <ul class="doc_options">
+            <li><a href="">Waiting for me</a> </li>
+            <li><a href="">Waiting for others</a> </li>
+            <li><a href="">Signed</a> </li>
+        </ul>
+
+        <a href="" class="btn-highlight">Send For Signing</a>
     </div>
 
     <div class="right_interface">
-book
+
+    {% for doc in documents %}
+        <div class="content">
+            <h5>{{doc}}</h5>
+            <p>Waiting for others</p>
+            <p>
+                <span class="signed">Tatenda Signed</span> <span class="not_signed">Peter not signed</span>
+                <span><a href="" class="btn-high">Sign Document</a> </span>
+            </p>
+        </div>
+
+    {% endfor %}
+
     </div>
 
 </div>
