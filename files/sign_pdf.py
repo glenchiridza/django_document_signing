@@ -13,7 +13,8 @@ import typing
 from decimal import Decimal
 
 
-def sign_pdf_file(pdf_name, pdf_file, signature_url, page_num):
+def sign_pdf_file(pdf_name, pdf_file,
+                  signature_url, page_num,num_of_signatures):
     print(pdf_file)
     doc: typing.Optional[Document] = None
     with open(pdf_file, "rb") as pdf_file_handle:
@@ -34,15 +35,17 @@ def sign_pdf_file(pdf_name, pdf_file, signature_url, page_num):
     layout: PageLayout = SingleColumnLayout(page)
 
     # add an Image
-    layout.add(
-        Image(
-            signature_url,
-            width=Decimal(100),
-            height=Decimal(50),
-            horizontal_alignment=Alignment.RIGHT,
-            vertical_alignment=Alignment.BOTTOM
+    for idx in range(num_of_signatures):
+
+        layout.add(
+            Image(
+                signature_url,
+                width=Decimal(100),
+                height=Decimal(50),
+                horizontal_alignment=Decimal(idx*50),
+                vertical_alignment=Alignment.BOTTOM
+            )
         )
-    )
 
     # store
     with open(f"media/signed_documents/{pdf_name}.pdf", "wb") as pdf_file_handle:

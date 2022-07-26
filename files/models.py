@@ -28,7 +28,8 @@ class SignDocument(models.Model):
     document = models.OneToOneField(Document, on_delete=models.SET_NULL, null=True)
     signature = models.OneToOneField(Signature, on_delete=models.SET_NULL, null=True)
     page_number = models.PositiveIntegerField(default=0)
-    num_of_signatures = models.PositiveIntegerField(default=0)
+    num_of_signatures = models.PositiveIntegerField(default=1)
+    user_signed = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"signed document {self.document.document_name}"
@@ -46,6 +47,7 @@ class ESignDocument(models.Model):
     document = models.OneToOneField(Document, on_delete=models.SET_NULL, null=True)
     signature = models.OneToOneField(ESignModel, on_delete=models.SET_NULL, null=True)
     page_number = models.PositiveIntegerField(default=0)
+    num_of_signatures = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return f"signed document {self.document.document_name}"

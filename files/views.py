@@ -57,15 +57,21 @@ def sign_document(request):
             doc_pk = request.POST.get('document')
             sn_pk = request.POST.get('signature')
             page_num = request.POST.get('page_number')
+            num_of_signatures = request.POST.get('num_of_signatures')
             document = Document.objects.get(id=doc_pk)
             signature = Signature.objects.get(id=sn_pk)
             print(document.upload_pdf.url, signature.signature_image.url)
             full_sign_url = request.build_absolute_uri(signature.signature_image.url)
+
+            doc_sign = form.save(commit=False)
+            doc_sign.user_signed += 1
+
             sign_pdf_file(document.document_name,
                           str(document.upload_pdf.url)[1:],
                           full_sign_url,
-                          int(page_num))
-            form.save()
+                          int(page_num),
+                          int(num_of_signatures))
+            doc_sign.save()
     context = {
         "form": form
     }
@@ -116,6 +122,7 @@ def esign_document(request):
             doc_pk = request.POST.get('document')
             sn_pk = request.POST.get('signature')
             page_num = request.POST.get('page_number')
+            num_of_signatures = request.POST.get('num_of_signatures')
             document = Document.objects.get(id=doc_pk)
             signature = ESignModel.objects.get(id=sn_pk)
             print(document.upload_pdf.url, signature_base64(signature.signature))
@@ -123,7 +130,8 @@ def esign_document(request):
             sign_pdf_file(document.document_name,
                           str(document.upload_pdf.url)[1:],
                           signature_base64(signature.signature),
-                          int(page_num))
+                          int(page_num),
+                          int(num_of_signatures))
             form.save()
     context = {
         "form": form
