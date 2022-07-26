@@ -1,9 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 
-from .models import Document, Signature,SignDocument
+from .models import Document, Signature, SignDocument, ESignModel
 from .forms import UploadForm, SignForm
 from .sign_pdf import sign_pdf_file
+
+from django.views import generic
 
 
 def success_page(request):
@@ -57,3 +60,22 @@ def sign_document(request):
         "form": form
     }
     return render(request, 'files/sign_document.html', context)
+
+
+# Esign views
+
+
+class ESignCreateView(generic.CreateView):
+    model = ESignModel
+    fields = '__all__'
+    success_url = reverse_lazy('list')
+
+
+class ESignUpdateView(generic.UpdateView):
+    model = ESignModel
+    fields = '__all__'
+    success_url = reverse_lazy('list')
+
+
+class ESignListView(generic.ListView):
+    model = ESignModel

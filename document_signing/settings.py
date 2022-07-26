@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'vzvtc1yq59bg=bt+fpi-vcsqsofrcah2p^0u2w$dg#ej#=188t'
+SECRET_KEY = '#not#very#secret'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'files',
+
+    'jsignature',
 ]
 
 MIDDLEWARE = [
@@ -132,3 +134,7 @@ MEDIA_URL = '/media/'
 
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+
+JSIGNATURE_JQUERY = 'admin'
