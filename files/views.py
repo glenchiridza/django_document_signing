@@ -22,7 +22,7 @@ def success_page(request):
             not_signed.append(doc)
     context = {
         "documents": not_signed,
-        "signed_docs":signed
+        "signed_docs": signed
     }
     return render(request, 'files/success.html', context)
 
@@ -89,7 +89,7 @@ class ESignCreateView(generic.CreateView):
     def dispatch(self, request, *args, **kwargs):
         exists = User.objects.get(username=self.request.user.username)
         if exists:
-            return redirect("/upload/e_update/"+ str(self.request.user.id))
+            return redirect("/upload/e_update/" + str(self.request.user.id))
 
     def form_valid(self, form):
         esign = form.save(commit=False)

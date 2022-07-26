@@ -30,9 +30,17 @@ class SignDocument(models.Model):
     page_number = models.PositiveIntegerField(default=0)
     num_of_signatures = models.PositiveIntegerField(default=1)
     user_signed = models.PositiveIntegerField(default=0)
+    signed_document_url = models.CharField(max_length=200)
 
     def __str__(self):
         return f"signed document {self.document.document_name}"
+
+
+class SendForSigning(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
 
 
 # jsignature model
@@ -48,6 +56,7 @@ class ESignDocument(models.Model):
     signature = models.OneToOneField(ESignModel, on_delete=models.SET_NULL, null=True)
     page_number = models.PositiveIntegerField(default=0)
     num_of_signatures = models.PositiveIntegerField(default=1)
+    signed_document_url = models.CharField(max_length=200)
 
     def __str__(self):
         return f"signed document {self.document.document_name}"
