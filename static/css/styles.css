@@ -1,11 +1,39 @@
 .container{
-    margin:5%;
+    margin:1%;
     margin-top:2%;
     padding:10px;
     background:#5555;
     color:#000;
 
 }
+.nav{
+    margin-top:-4%;
+    display:flex;
+    justify-content:space-between;
+    background:blue;
+    align-items:center;
+    color:#ffffff;
+
+}
+.nav a{
+    color:#fff !important;
+}
+.interface{
+    display:flex;
+    width:100%;
+}
+
+.left_interface{
+    width:25%;
+    display:flex;
+    flex-direction:column;
+}
+.right_interface{
+    width:75%;
+    display:flex;
+    flex-direction:column;
+}
+
 .field{
     display:flex;
     justify-content:start;

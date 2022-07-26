@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+
+
 {% block content %}
 
 <p>
@@ -7,10 +9,24 @@
 <!--<a href="{% url 'sign-document' %}" class="btn-doc">Sign existing document</a>-->
 
 </p>
-<div class="title">
-<a href="{% url 'success-page' %}" class="btn-doc">Home</a>
-<a href="{% url 'upload-document' %}" class="btn-doc">Upload Document</a>
-<a href="{% url 'sign-document' %}" class="btn-doc">Sign existing document</a>
+<!--<div class="title">-->
+<!--<a href="{% url 'success-page' %}" class="btn-doc">Home</a>-->
+<!--<a href="{% url 'upload-document' %}" class="btn-doc">Upload Document</a>-->
+<!--<a href="{% url 'sign-document' %}" class="btn-doc">Sign existing document</a>-->
+<!--</div>-->
+
+{% include 'navbar.html' %}
+
+<div class="interface">
+
+    <div class="left_interface">
+oiko
+    </div>
+
+    <div class="right_interface">
+book
+    </div>
+
 </div>
 
 <h1>Documents Waiting to be signed</h1>
