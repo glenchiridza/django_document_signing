@@ -26,7 +26,7 @@ class Document(models.Model):
 
 class SignDocument(models.Model):
     document = models.OneToOneField(Document, on_delete=models.SET_NULL, null=True)
-    signature = models.OneToOneField(Signature, on_delete=models.SET_NULL, null=True)
+    signature = models.ForeignKey(Signature, on_delete=models.SET_NULL, null=True)
     page_number = models.PositiveIntegerField(default=0)
     num_of_signatures = models.PositiveIntegerField(default=1)
     user_signed = models.PositiveIntegerField(default=0)
@@ -38,7 +38,7 @@ class SignDocument(models.Model):
 
 class SendForSigning(models.Model):
     sender = models.OneToOneField(User,related_name="sender", on_delete=models.CASCADE)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     document = models.ForeignKey(SignDocument, on_delete=models.CASCADE)
 
     def __str__(self):

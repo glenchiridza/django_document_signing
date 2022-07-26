@@ -2,28 +2,44 @@
 
 {% block content %}
 
+<div class="auth_page">
+    <h2>Document Signing App</h2>
+
+</div>
 {% if page == 'login' %}
-<div>
+<div class="auth_page">
     <form method="POST" action="">
         {% csrf_token %}
 
+        <div class="field">
         <label>Username</label>
+        </div>
+
+        <div class="field">
         <input type="text" name="username" placeholder="Enter username"/>
+        </div>
 
+        <div class="field">
         <label>Password</label>
+        </div>
+        <div class="field">
         <input type="password" name="password" placeholder="Enter password"/>
+        </div>
 
-
-        <input type="submit" value="Login"/>
+        <div class="field">
+        <input type="submit" value="Login" class="btn-upload"/>
+        </div>
     </form>
-    <p>have no account?</p>
-    <a href="{% url 'register' %}">Sign up</a>
+
+    <p>have no account?
+    <a href="{% url 'register' %}">Sign up</a> </p>
+
 </div>
 
 {% else %}
 
 <!--register-->
-<div>
+<div class="auth_page">
     <form method="POST" action="">
         {% csrf_token %}
         {% for field in form %}
@@ -34,8 +50,8 @@
     <br/>
         <input type="submit" value="Register" class="btn-upload"/>
     </form>
-    <p>already have an account?</p>
-    <a href="{% url 'login' %}">Sign In</a>
+    <p>already have an account?
+    <a href="{% url 'login' %}">Sign In</a></p>
 </div>
 
 {% endif %}

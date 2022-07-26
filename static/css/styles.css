@@ -2,9 +2,24 @@
     margin:5%;
     margin-top:2%;
     padding:10px;
-    background:#000;
-    color:#fff;
+    background:#5555;
+    color:#000;
 
+}
+.field{
+    display:flex;
+    justify-content:start;
+    width:100%;
+    margin-bottom:2%;
+}
+.auth_page{
+    display:flex;
+    flex-direction:column;
+    width:30%;
+    margin:auto;
+}
+a{
+    color:blue;
 }
 .title{
     display:flex;

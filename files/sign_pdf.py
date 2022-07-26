@@ -14,7 +14,7 @@ from decimal import Decimal
 
 
 def sign_pdf_file(pdf_name, pdf_file,
-                  signature_url, page_num,num_of_signatures):
+                  signature_url, page_num, num_of_signatures):
     print(pdf_file)
     doc: typing.Optional[Document] = None
     with open(pdf_file, "rb") as pdf_file_handle:
@@ -28,24 +28,26 @@ def sign_pdf_file(pdf_name, pdf_file,
     # pagenum-1 because count starts from zero
     page: Page = doc.get_page(page_num - 1)
 
+    # doc.pop_page(page_num)
     # add Page to Document
-    doc.add_page(page)
+    # doc.add_page(page)
+
 
     # set a PageLayout
     layout: PageLayout = SingleColumnLayout(page)
 
     # add an Image
-    for idx in range(num_of_signatures):
 
-        layout.add(
-            Image(
-                signature_url,
-                width=Decimal(100),
-                height=Decimal(50),
-                horizontal_alignment=Decimal(idx*50),
-                vertical_alignment=Alignment.BOTTOM
-            )
+    layout.add(
+        Image(
+            signature_url,
+            width=Decimal(100),
+            height=Decimal(50),
+            padding_left=Decimal(num_of_signatures+20),
+            horizontal_alignment=Alignment.LEFT,
+            vertical_alignment=Alignment.BOTTOM
         )
+    )
 
     # store
     with open(f"media/signed_documents/{pdf_name}.pdf", "wb") as pdf_file_handle:

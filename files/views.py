@@ -15,7 +15,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
 
-
 def loginPage(request):
     page = 'login'
     # restrict a logged in user from going to the login url again
@@ -108,23 +107,25 @@ def sign_document(request):
             doc_pk = request.POST.get('document')
             sn_pk = request.POST.get('signature')
             page_num = request.POST.get('page_number')
-            num_of_signatures = request.POST.get('num_of_signatures')
             document = Document.objects.get(id=doc_pk)
             signature = Signature.objects.get(id=sn_pk)
             print(document.upload_pdf.url, signature.signature_image.url)
             full_sign_url = request.build_absolute_uri(signature.signature_image.url)
 
             doc_sign = form.save(commit=False)
-            doc_sign.user_signed += 1
+            doc_sign.user_signed = 1
 
+            signature_count = 1
             sign_pdf_file(document.document_name,
                           str(document.upload_pdf.url)[1:],
                           full_sign_url,
                           int(page_num),
-                          int(num_of_signatures))
+                          int(signature_count))
             signed_pdf_link = f"/media/signed_documents/{document.document_name}.pdf"
             doc_sign.signed_document_url = signed_pdf_link
             doc_sign.save()
+            return redirect("success-page")
+
     context = {
         "form": form
     }
@@ -152,7 +153,9 @@ def sign_send_document(request, pk):
                 full_sign_url = request.build_absolute_uri(signature.signature_image.url)
 
                 doc_sign = form.save(commit=False)
-                doc_sign.user_signed += 1
+
+                signatures_count = doc_sign.user_signed + 1
+                doc_sign.user_signed = doc_send.document.user_signed + 1
                 doc_sign.document = doc_send.document.document
                 doc_sign.page_number = page_num
                 doc_sign.num_of_signatures = doc_send.document.num_of_signatures
@@ -161,7 +164,7 @@ def sign_send_document(request, pk):
                               str(doc_send.document.upload_pdf.url)[1:],
                               full_sign_url,
                               int(page_num),
-                              int(doc_send.document.num_of_signatures))
+                              int(signatures_count))
 
                 doc_sign.signed_document_url = doc_send.document.signed_document_url
                 doc_sign.save()
@@ -170,7 +173,7 @@ def sign_send_document(request, pk):
             "items": doc_send,
             "valid_id": True
         }
-    return render(request, 'files/sign_document.html', context)
+    return render(request, 'files/sign_existing.html', context)
 
 
 class SendForSigningView(generic.CreateView):
@@ -188,6 +191,7 @@ class ToBeSigned(generic.ListView):
     template_name = "files/to_be_signed.html"
     queryset = SendForSigning.objects.all()
     context_object_name = "o"
+
 
 # Esign views
 

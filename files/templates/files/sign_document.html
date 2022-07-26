@@ -7,11 +7,6 @@
 <div class="section">
 
     <div class="left">
-{% if valid_id %}
-
-{% for item in items %}
-            {{item.document.document_name}}
-        {% endfor %}
 <form method="post" action="">
     {% csrf_token %}
     {% for field in form %}
@@ -22,9 +17,6 @@
     <br/>
     <input type="submit" value="Process & Sign" class="btn-upload"/>
 </form>
-{% else %}
-<h5>No document was specified in this location, Go Back Please</h5>
-{% endif %}
 
 
     </div>
