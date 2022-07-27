@@ -225,7 +225,7 @@ class SendForSigningView(generic.CreateView):
 class ToBeSigned(generic.ListView):
     template_name = "files/to_be_signed.html"
     queryset = SendForSigning.objects.all()
-    context_object_name = "o"
+    context_object_name = "signed_docs"
 
 
 # Esign views

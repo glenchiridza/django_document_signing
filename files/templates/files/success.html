@@ -25,7 +25,7 @@
 
         <p class="btn-highlight">Documents</p>
         <ul class="doc_options">
-            <li><a href="{% url 'success-page' %}?q=for_me">Waiting for me</a> </li>
+            <li><a href="{% url 'docs_to_sign' %}">Waiting for me</a> </li>
             <li><a href="{% url 'success-page' %}?q=for_others">Waiting for others</a> </li>
             <li><a href="{% url 'success-page' %}?q=signed">Signed</a> </li>
         </ul>
@@ -37,12 +37,15 @@
 
     {% for doc in all_documents %}
         <div class="content">
+            <a href="{{doc.signed_document_url}}">Download Document</a>
             <h5>{{doc}}</h5>
-            <p>Waiting for others</p>
+            {% if doc.user_signed < doc.num_of_signatures %}
+            <p style="color:red;">Waiting for others</p>
+            {% endif %}
             <p>
-                {% for signee in signed_by_list %}
-                <span class="not_signed">{{signee}}</span>
-                {% endfor %}
+
+                <span class="not_signed">signed by {{doc.signed_by}}</span>
+
                 {% if show_sign %}
                 <span><a href="" class="btn-high">Sign Document</a> </span>
                 {% endif %}
