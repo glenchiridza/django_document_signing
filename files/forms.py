@@ -29,4 +29,4 @@ class ESignForm(ModelForm):
 class SendForSigningForm(ModelForm):
     class Meta:
         model = SendForSigning
-        fields = "__all__"
+        fields = ("receiver","document")

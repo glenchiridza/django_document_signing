@@ -39,11 +39,11 @@ class SignDocument(models.Model):
 
 class SendForSigning(models.Model):
     sender = models.OneToOneField(User,related_name="sender", on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE)
     document = models.ForeignKey(SignDocument, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.username
+        return self.receiver.username
 
 
 # jsignature model

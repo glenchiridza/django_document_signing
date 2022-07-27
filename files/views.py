@@ -272,18 +272,25 @@ def esign_document(request):
             doc_pk = request.POST.get('document')
             sn_pk = request.POST.get('signature')
             page_num = request.POST.get('page_number')
-            num_of_signatures = request.POST.get('num_of_signatures')
             document = Document.objects.get(id=doc_pk)
-            signature = ESignModel.objects.get(id=sn_pk)
+            signature = Signature.objects.get(id=sn_pk)
+            print(document.upload_pdf.url, signature.signature_image.url)
+            full_sign_url = request.build_absolute_uri(signature.signature_image.url)
 
-            print(document.upload_pdf.url, signature_base64(signature.signature))
-            # full_sign_url = request.build_absolute_uri(signature.signature)
+            doc_sign = form.save(commit=False)
+            doc_sign.user_signed = 1
+
+            doc_sign.signed_by = f"{request.user.username},"
+
+            signature_count = 1
             sign_pdf_file(document.document_name,
                           str(document.upload_pdf.url)[1:],
                           signature_base64(signature.signature),
                           int(page_num),
-                          int(num_of_signatures))
-            form.save()
+                          int(signature_count))
+            signed_pdf_link = f"/media/signed_documents/{document.document_name}.pdf"
+            doc_sign.signed_document_url = signed_pdf_link
+            doc_sign.save()
     context = {
         "form": form
     }

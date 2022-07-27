@@ -30,7 +30,7 @@
             <li><a href="{% url 'success-page' %}?q=signed">Signed</a> </li>
         </ul>
 
-        <a href="" class="btn-highlight">Send For Signing</a>
+        <a href="{% url 'send-doc' %}" class="btn-highlight">Send For Signing</a>
     </div>
 
     <div class="right_interface">
@@ -58,28 +58,28 @@
 
 </div>
 
-<h1>Documents Waiting to be signed</h1>
+<!--<h1>Documents Waiting to be signed</h1>-->
 
-<ul>
-{% for doc in all_documents %}
+<!--<ul>-->
+<!--{% for doc in all_documents %}-->
 
-    <li>{{doc}}</li>
-
-
-{% endfor %}
-</ul>
+<!--    <li>{{doc}}</li>-->
 
 
-
-<h1>List of signed documents</h1>
-
-<ul>
-{% for s_doc in all_documents %}
-
-    <li>{{s_doc}}</li>
+<!--{% endfor %}-->
+<!--</ul>-->
 
 
-{% endfor %}
-</ul>
+
+<!--<h1>List of signed documents</h1>-->
+
+<!--<ul>-->
+<!--{% for s_doc in all_documents %}-->
+
+<!--    <li>{{s_doc}}</li>-->
+
+
+<!--{% endfor %}-->
+<!--</ul>-->
 
 {% endblock %}
