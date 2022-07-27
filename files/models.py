@@ -31,9 +31,10 @@ class SignDocument(models.Model):
     num_of_signatures = models.PositiveIntegerField(default=1)
     user_signed = models.PositiveIntegerField(default=0)
     signed_document_url = models.CharField(max_length=200)
+    signed_by = models.CharField(max_length=300)
 
     def __str__(self):
-        return f"signed document {self.document.document_name}"
+        return f"signed document {self.document}"
 
 
 class SendForSigning(models.Model):

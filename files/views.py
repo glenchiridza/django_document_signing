@@ -14,6 +14,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
+FOR_ME = "for_me"
+FOR_OTHERS = "for_others"
+SIGNED = "signed"
+
 
 def loginPage(request):
     page = 'login'
@@ -67,19 +71,47 @@ def registerUser(request):
 
 
 def success_page(request):
+    q = request.GET.get('q') if request.GET.get('q') is not None else ''
+    query = str(q)
     documents = Document.objects.all()
     signed = []
     not_signed = []
-    for doc in documents:
-        docs_signed = SignDocument.objects.filter(document__document_name=doc.document_name)
+    waiting_others = []
+    context = {}
+
+    docs_signed = SignDocument.objects.filter(
+        signed_by__icontains=request.user.username)
+    for doc in docs_signed:
         if docs_signed:
+            if doc.user_signed < doc.num_of_signatures:
+                waiting_others.append(doc)
             signed.append(doc)
+
         else:
             not_signed.append(doc)
-    context = {
-        "documents": not_signed,
-        "signed_docs": signed
-    }
+
+    if query == FOR_ME:
+        context.update({
+            "all_documents": not_signed,
+            "show_sign":True,
+        })
+
+    if query == FOR_OTHERS:
+        context.update({
+            "all_documents": waiting_others,
+            "show_sign":False,
+        })
+
+    if query == SIGNED:
+        context.update({
+            "all_documents": signed,
+            "show_sign":False,
+        })
+    else:
+        context.update({
+            "all_documents": waiting_others,
+            "show_sign":False,
+        })
     return render(request, 'files/success.html', context)
 
 
@@ -114,6 +146,8 @@ def sign_document(request):
 
             doc_sign = form.save(commit=False)
             doc_sign.user_signed = 1
+
+            doc_sign.signed_by = f"{request.user.username},"
 
             signature_count = 1
             sign_pdf_file(document.document_name,
@@ -159,6 +193,7 @@ def sign_send_document(request, pk):
                 doc_sign.document = doc_send.document.document
                 doc_sign.page_number = page_num
                 doc_sign.num_of_signatures = doc_send.document.num_of_signatures
+                doc_sign.signed_by = f"{doc_sign.signed_by} +{request.user.username},"
 
                 sign_pdf_file(doc_send.document.document_name,
                               str(doc_send.document.upload_pdf.url)[1:],
@@ -240,6 +275,7 @@ def esign_document(request):
             num_of_signatures = request.POST.get('num_of_signatures')
             document = Document.objects.get(id=doc_pk)
             signature = ESignModel.objects.get(id=sn_pk)
+
             print(document.upload_pdf.url, signature_base64(signature.signature))
             # full_sign_url = request.build_absolute_uri(signature.signature)
             sign_pdf_file(document.document_name,
