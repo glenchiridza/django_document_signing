@@ -38,7 +38,7 @@ class SignDocument(models.Model):
 
 
 class SendForSigning(models.Model):
-    sender = models.OneToOneField(User,related_name="sender", on_delete=models.CASCADE)
+    sender = models.ForeignKey(User,related_name="sender", on_delete=models.CASCADE)
     receiver = models.ForeignKey(User, on_delete=models.CASCADE)
     document = models.ForeignKey(SignDocument, on_delete=models.CASCADE)
 

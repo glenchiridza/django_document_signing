@@ -1,3 +1,6 @@
+import base64
+from io import BytesIO
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
@@ -13,6 +16,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from PIL import Image
 
 FOR_ME = "for_me"
 FOR_OTHERS = "for_others"
@@ -167,8 +171,7 @@ def sign_document(request):
 
 
 def sign_send_document(request, pk):
-    doc_send = SendForSigning.objects.filter(
-        Q(user=request.user) &
+    doc_send = SignDocument.objects.get(
         Q(id=pk)
     )
     context = {
@@ -180,7 +183,8 @@ def sign_send_document(request, pk):
             form = SentSignForm(request.POST)
             if form.is_valid():
                 sn_pk = request.POST.get('signature')
-                page_num = doc_send.document.page_number
+
+                page_num = doc_send.page_number
 
                 signature = Signature.objects.get(id=sn_pk)
 
@@ -189,10 +193,10 @@ def sign_send_document(request, pk):
                 doc_sign = form.save(commit=False)
 
                 signatures_count = doc_sign.user_signed + 1
-                doc_sign.user_signed = doc_send.document.user_signed + 1
-                doc_sign.document = doc_send.document.document
+                doc_sign.user_signed = doc_send.user_signed + 1
+                doc_sign.document = doc_send.document
                 doc_sign.page_number = page_num
-                doc_sign.num_of_signatures = doc_send.document.num_of_signatures
+                doc_sign.num_of_signatures = doc_send.num_of_signatures
                 doc_sign.signed_by = f"{doc_sign.signed_by} +{request.user.username},"
 
                 sign_pdf_file(doc_send.document.document_name,
@@ -201,8 +205,9 @@ def sign_send_document(request, pk):
                               int(page_num),
                               int(signatures_count))
 
-                doc_sign.signed_document_url = doc_send.document.signed_document_url
+                doc_sign.signed_document_url = doc_send.signed_document_url
                 doc_sign.save()
+                return redirect("success-page")
         context = {
             "form": form,
             "items": doc_send,
@@ -214,6 +219,7 @@ def sign_send_document(request, pk):
 class SendForSigningView(generic.CreateView):
     template_name = "files/sendforsigning.html"
     form_class = SendForSigningForm
+    success_url = "/upload"
 
     def form_valid(self, form):
         send = form.save(commit=False)
@@ -273,14 +279,15 @@ def esign_document(request):
             sn_pk = request.POST.get('signature')
             page_num = request.POST.get('page_number')
             document = Document.objects.get(id=doc_pk)
-            signature = Signature.objects.get(id=sn_pk)
-            print(document.upload_pdf.url, signature.signature_image.url)
-            full_sign_url = request.build_absolute_uri(signature.signature_image.url)
+            signature = ESignModel.objects.get(id=sn_pk)
 
             doc_sign = form.save(commit=False)
             doc_sign.user_signed = 1
 
             doc_sign.signed_by = f"{request.user.username},"
+
+            img = Image.open(BytesIO(base64.b64decode(signature_base64(signature.signature))))
+            img.save("image.png","PNG")
 
             signature_count = 1
             sign_pdf_file(document.document_name,
