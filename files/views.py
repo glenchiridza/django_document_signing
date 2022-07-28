@@ -97,24 +97,24 @@ def success_page(request):
     if query == FOR_ME:
         context.update({
             "all_documents": not_signed,
-            "show_sign":True,
+            "show_sign": True,
         })
 
     if query == FOR_OTHERS:
         context.update({
             "all_documents": waiting_others,
-            "show_sign":False,
+            "show_sign": False,
         })
 
     if query == SIGNED:
         context.update({
             "all_documents": signed,
-            "show_sign":False,
+            "show_sign": False,
         })
     else:
         context.update({
             "all_documents": waiting_others,
-            "show_sign":False,
+            "show_sign": False,
         })
     return render(request, 'files/success.html', context)
 
@@ -172,32 +172,30 @@ def sign_document(request):
 
 def sign_send_document(request, pk):
     doc_send = SignDocument.objects.get(
-        Q(id=pk)
+        id=pk
     )
     context = {
         "valid_id": False
     }
     if doc_send:
-        form = SentSignForm()
+        form = SentSignForm(instance=doc_send)
         if request.method == "POST":
-            form = SentSignForm(request.POST)
+            form = SentSignForm(request.POST, instance=doc_send)
             if form.is_valid():
-                sn_pk = request.POST.get('signature')
+                # sn_pk = request.POST.get('signature')
 
                 page_num = doc_send.page_number
 
-                signature = Signature.objects.get(id=sn_pk)
+                # signature = Signature.objects.get(id=sn_pk)
 
-                full_sign_url = request.build_absolute_uri(signature.signature_image.url)
+                full_sign_url = request.build_absolute_uri(doc_send.signature.signature_image.url)
 
-                doc_sign = form.save(commit=False)
-
-                signatures_count = doc_sign.user_signed + 1
-                doc_sign.user_signed = doc_send.user_signed + 1
-                doc_sign.document = doc_send.document
-                doc_sign.page_number = page_num
-                doc_sign.num_of_signatures = doc_send.num_of_signatures
-                doc_sign.signed_by = f"{doc_sign.signed_by} +{request.user.username},"
+                signatures_count = doc_send.user_signed + 1
+                doc_send.user_signed = doc_send.user_signed + 1
+                doc_send.document = doc_send.document
+                doc_send.page_number = page_num
+                doc_send.num_of_signatures = doc_send.num_of_signatures
+                doc_send.signed_by = f"{doc_send.signed_by} +{request.user.username},"
 
                 sign_pdf_file(doc_send.document.document_name,
                               str(doc_send.document.upload_pdf.url)[1:],
@@ -205,8 +203,8 @@ def sign_send_document(request, pk):
                               int(page_num),
                               int(signatures_count))
 
-                doc_sign.signed_document_url = doc_send.signed_document_url
-                doc_sign.save()
+                # doc_sign.signed_document_url = doc_send.signed_document_url
+                form.save()
                 return redirect("success-page")
         context = {
             "form": form,
@@ -230,8 +228,22 @@ class SendForSigningView(generic.CreateView):
 
 class ToBeSigned(generic.ListView):
     template_name = "files/to_be_signed.html"
-    queryset = SendForSigning.objects.all()
     context_object_name = "signed_docs"
+
+    def get_queryset(self):
+        queryset = None
+        sendforsign = SendForSigning.objects.filter(receiver=self.request.user)
+        for doc in sendforsign:
+            queryset = SignDocument.objects.filter(id=doc.document.id)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        sendforsign = SendForSigning.objects.get(receiver=self.request.user)
+        context = super().get_context_data(**kwargs)
+        context['sender'] = sendforsign.sender
+        return context
+
+    #sendforsignging
 
 
 # Esign views
@@ -287,7 +299,7 @@ def esign_document(request):
             doc_sign.signed_by = f"{request.user.username},"
 
             img = Image.open(BytesIO(base64.b64decode(signature_base64(signature.signature))))
-            img.save("image.png","PNG")
+            img.save("image.png", "PNG")
 
             signature_count = 1
             sign_pdf_file(document.document_name,
