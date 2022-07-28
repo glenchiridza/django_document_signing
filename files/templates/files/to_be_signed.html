@@ -3,12 +3,11 @@
 {% block content %}
 
 <h1>Docs to be signed</h1>
-
+<hr/>
 {% for doc in signed_docs %}
     <a href="{% url 'sign-send-document' doc.id %}">{{doc.document}}</a>
     <p>Send by {{sender}}</p>
 {% endfor %}
+<hr/>
 
-<a href="{% url 'sign-document' %}" class="not_signed">Sign Now</a>
-<a href="{% url 'list' %}" class="not_signed">ESign Now</a>
 {% endblock %}

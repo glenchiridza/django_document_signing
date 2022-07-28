@@ -77,7 +77,7 @@ def registerUser(request):
 def success_page(request):
     q = request.GET.get('q') if request.GET.get('q') is not None else ''
     query = str(q)
-    documents = Document.objects.all()
+
     signed = []
     not_signed = []
     waiting_others = []
@@ -256,6 +256,7 @@ class ESignCreateView(generic.CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         exists = User.objects.get(username=self.request.user.username)
+
         if exists:
             return redirect("/upload/e_update/" + str(self.request.user.id))
 
