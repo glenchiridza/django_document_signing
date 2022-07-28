@@ -10,9 +10,10 @@
 
 {% if valid_id %}
 
-            {{items.document.document_name}}
+        <h1>You're about to sign the following document</h1>
+           1.) {{items.document.document_name}}
 
-
+        <p>click the button below to continue with process</p>
 <form method="post" action="">
     {% csrf_token %}
     {% for field in form %}
