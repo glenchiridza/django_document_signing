@@ -144,7 +144,7 @@ def sign_document(request):
             sn_pk = request.POST.get('signature')
             page_num = request.POST.get('page_number')
             document = Document.objects.get(id=doc_pk)
-            signature = Signature.objects.get(id=sn_pk)
+            signature = Signature.objects.get(signature_owner=request.user)
             print(document.upload_pdf.url, signature.signature_image.url)
             full_sign_url = request.build_absolute_uri(signature.signature_image.url)
 
@@ -188,7 +188,8 @@ def sign_send_document(request, pk):
 
                 # signature = Signature.objects.get(id=sn_pk)
 
-                full_sign_url = request.build_absolute_uri(doc_send.signature.signature_image.url)
+                my_signature = Signature.objects.get(signature_owner=request.user)
+                full_sign_url = request.build_absolute_uri(my_signature.signature_image.url)
 
                 signatures_count = doc_send.user_signed + 1
                 doc_send.user_signed = doc_send.user_signed + 1

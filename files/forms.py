@@ -11,13 +11,13 @@ class UploadForm(ModelForm):
 class SignForm(ModelForm):
     class Meta:
         model = SignDocument
-        fields = ("document", "signature", "page_number", "num_of_signatures")
+        fields = ("document", "page_number", "num_of_signatures")
 
 
 class SentSignForm(ModelForm):
     class Meta:
         model = SignDocument
-        fields = ("signature",)
+        fields = ("",)
 
 
 class ESignForm(ModelForm):
