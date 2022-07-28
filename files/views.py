@@ -137,6 +137,12 @@ def uploadDocument(request):
 
 def sign_document(request):
     form = SignForm()
+    try:
+        signature = Signature.objects.get(signature_owner=request.user)
+        if signature:
+            pass
+    except:
+        return redirect("/admin")
     if request.method == "POST":
         form = SignForm(request.POST)
         if form.is_valid():
@@ -145,7 +151,6 @@ def sign_document(request):
             page_num = request.POST.get('page_number')
             document = Document.objects.get(id=doc_pk)
             signature = Signature.objects.get(signature_owner=request.user)
-            print(document.upload_pdf.url, signature.signature_image.url)
             full_sign_url = request.build_absolute_uri(signature.signature_image.url)
 
             doc_sign = form.save(commit=False)
@@ -177,6 +182,13 @@ def sign_send_document(request, pk):
     context = {
         "valid_id": False
     }
+    try:
+        my_signature = Signature.objects.get(signature_owner=request.user)
+        if my_signature:
+            pass
+    except:
+        return redirect("/admin")
+
     if doc_send:
         form = SentSignForm(instance=doc_send)
         if request.method == "POST":
@@ -188,7 +200,6 @@ def sign_send_document(request, pk):
 
                 # signature = Signature.objects.get(id=sn_pk)
 
-                my_signature = Signature.objects.get(signature_owner=request.user)
                 full_sign_url = request.build_absolute_uri(my_signature.signature_image.url)
 
                 signatures_count = doc_send.user_signed + 1
@@ -196,7 +207,7 @@ def sign_send_document(request, pk):
                 doc_send.document = doc_send.document
                 doc_send.page_number = page_num
                 doc_send.num_of_signatures = doc_send.num_of_signatures
-                doc_send.signed_by = f"{doc_send.signed_by} +{request.user.username},"
+                doc_send.signed_by = f"{doc_send.signed_by} {request.user.username},"
 
                 sign_pdf_file(doc_send.document.document_name,
                               str(doc_send.document.upload_pdf.url)[1:],
@@ -239,9 +250,13 @@ class ToBeSigned(generic.ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        sendforsign = SendForSigning.objects.get(receiver=self.request.user)
+
         context = super().get_context_data(**kwargs)
-        context['sender'] = sendforsign.sender
+        try:
+            sendforsign = SendForSigning.objects.get(receiver=self.request.user)
+            context['sender'] = sendforsign.sender
+        except:
+            pass
         return context
 
     #sendforsignging
