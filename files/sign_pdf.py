@@ -43,7 +43,7 @@ def sign_pdf_file(pdf_name, pdf_file,
             signature_url,
             width=Decimal(100),
             height=Decimal(50),
-            padding_left=Decimal(num_of_signatures+20),
+            padding_left=Decimal(num_of_signatures+16),
             horizontal_alignment=Alignment.LEFT,
             vertical_alignment=Alignment.BOTTOM
         )
