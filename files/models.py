@@ -30,7 +30,7 @@ class SignDocument(models.Model):
     signature = models.ForeignKey(Signature, on_delete=models.SET_NULL, null=True)
     page_number = models.PositiveIntegerField(default=0)
     num_of_signatures = models.PositiveIntegerField(default=1)
-    user_signed = models.PositiveIntegerField(default=0)
+    user_signed = models.PositiveIntegerField(default=1)
     signed_document_url = models.CharField(max_length=200)
     signed_by = models.CharField(max_length=300)
 
