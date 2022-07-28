@@ -7,6 +7,7 @@ User = get_user_model()
 
 class Signature(models.Model):
     signature_image = models.ImageField(upload_to="signature_image")
+    signature_owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return "signature"
